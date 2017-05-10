@@ -1,0 +1,472 @@
+{
+    "version": 8,
+    "name": "LOTR",
+    "metadata": {
+        "mapbox:autocomposite": true,
+        "mapbox:type": "template"
+    },
+    "center": [
+        -122.81193752626143,
+        45.05556302241786
+    ],
+    "zoom": 9.053003975041864,
+    "bearing": 0,
+    "pitch": 0,
+    "sources": {
+        "mapbox://mapbox.satellite": {
+            "url": "mapbox://mapbox.satellite",
+            "type": "raster",
+            "tileSize": 256
+        },
+        "mapbox://mapbox.mapbox-traffic-v1": {
+            "url": "mapbox://mapbox.mapbox-traffic-v1",
+            "type": "vector"
+        },
+        "composite": {
+            "url": "mapbox://mapbox.mapbox-terrain-v2,mapbox.mapbox-streets-v7,whitsons.cj25ak9t800ag32pc7aytel0q-8920i,whitsons.cj25b0y9m004r32p8m39tw2bh-47uzx",
+            "type": "vector"
+        }
+    },
+    "sprite": "mapbox://sprites/whitsons/cj1ssf6j100182rlbhb22yzki",
+    "glyphs": "mapbox://fonts/whitsons/{fontstack}/{range}.pbf",
+    "layers": [
+        {
+            "id": "background",
+            "type": "background",
+            "paint": {
+                "background-color": "white"
+            }
+        },
+        {
+            "id": "landcover",
+            "type": "fill-extrusion",
+            "source": "composite",
+            "source-layer": "landcover",
+            "layout": {
+                "visibility": "none"
+            },
+            "paint": {}
+        },
+        {
+            "id": "hillshade",
+            "type": "fill-extrusion",
+            "source": "composite",
+            "source-layer": "hillshade",
+            "layout": {
+                "visibility": "visible"
+            },
+            "paint": {}
+        },
+        {
+            "id": "contour",
+            "type": "line",
+            "source": "composite",
+            "source-layer": "contour",
+            "layout": {},
+            "paint": {}
+        },
+        {
+            "id": "mapbox-mapbox-satellite",
+            "type": "raster",
+            "source": "mapbox://mapbox.satellite",
+            "layout": {
+                "visibility": "visible"
+            },
+            "paint": {
+                "raster-opacity": 0.95,
+                "raster-fade-duration": 200,
+                "raster-saturation": 0.31,
+                "raster-brightness-min": 0,
+                "raster-brightness-max": 1
+            }
+        },
+        {
+            "id": "waterway",
+            "type": "line",
+            "source": "composite",
+            "source-layer": "waterway",
+            "layout": {
+                "visibility": "visible"
+            },
+            "paint": {
+                "line-color": "hsl(222, 92%, 51%)",
+                "line-opacity": 0.59,
+                "line-width": {
+                    "base": 1,
+                    "stops": [
+                        [
+                            2,
+                            1
+                        ],
+                        [
+                            22,
+                            0.75
+                        ]
+                    ]
+                }
+            }
+        },
+        {
+            "id": "road",
+            "type": "line",
+            "source": "composite",
+            "source-layer": "road",
+            "minzoom": 3.4,
+            "layout": {
+                "visibility": "visible"
+            },
+            "paint": {
+                "line-color": {
+                    "base": 1,
+                    "stops": [
+                        [
+                            3,
+                            "hsl(0, 2%, 11%)"
+                        ],
+                        [
+                            22,
+                            "hsl(45, 2%, 8%)"
+                        ]
+                    ]
+                },
+                "line-width": 2,
+                "line-opacity": 0.53
+            }
+        },
+        {
+            "id": "traffic",
+            "type": "line",
+            "source": "mapbox://mapbox.mapbox-traffic-v1",
+            "source-layer": "traffic",
+            "minzoom": 6,
+            "filter": [
+                "has",
+                "congestion"
+            ],
+            "layout": {
+                "visibility": "visible"
+            },
+            "paint": {
+                "line-color": "hsla(0, 2%, 8%, 0.86)",
+                "line-width": 2,
+                "line-opacity": 0.72
+            }
+        },
+        {
+            "id": "place-label",
+            "type": "symbol",
+            "source": "composite",
+            "source-layer": "place_label",
+            "minzoom": 2.5,
+            "layout": {
+                "visibility": "visible",
+                "text-field": "{name}",
+                "text-font": [
+                    "Ringbearer Medium",
+                    "Ringbearer Medium"
+                ],
+                "text-size": 15,
+                "text-letter-spacing": 0.2,
+                "text-line-height": 4
+            },
+            "paint": {
+                "text-halo-color": "hsl(0, 24%, 96%)",
+                "text-halo-width": 1,
+                "text-color": "hsl(26, 1%, 3%)"
+            }
+        },
+        {
+            "id": "mountain-peak-label (1)",
+            "type": "symbol",
+            "source": "composite",
+            "source-layer": "mountain_peak_label",
+            "layout": {
+                "visibility": "visible",
+                "text-field": "{name_en}",
+                "text-font": [
+                    "Ringbearer Medium",
+                    "Arial Unicode MS Regular"
+                ],
+                "text-size": {
+                    "base": 1,
+                    "stops": [
+                        [
+                            0,
+                            26
+                        ],
+                        [
+                            22,
+                            12
+                        ]
+                    ]
+                },
+                "text-offset": [
+                    2,
+                    2
+                ]
+            },
+            "paint": {
+                "text-color": "hsl(10, 31%, 86%)",
+                "text-halo-color": "hsl(13, 4%, 4%)",
+                "text-opacity": 1,
+                "text-halo-blur": 1,
+                "text-halo-width": 1.2
+            }
+        },
+        {
+            "id": "sidewalks",
+            "type": "line",
+            "source": "composite",
+            "source-layer": "sidewalks",
+            "layout": {
+                "visibility": "none",
+                "line-join": "bevel",
+                "line-cap": "round"
+            },
+            "paint": {
+                "line-color": "hsl(0, 4%, 27%)",
+                "line-opacity": 0.81,
+                "line-width": 1.5,
+                "line-blur": 0.25
+            }
+        },
+        {
+            "id": "streetlights",
+            "type": "circle",
+            "source": "composite",
+            "source-layer": "streetlights",
+            "minzoom": 12.2,
+            "layout": {
+                "visibility": "none"
+            },
+            "paint": {
+                "circle-radius": 2.5,
+                "circle-color": "hsl(49, 96%, 50%)",
+                "circle-blur": 0.6,
+                "circle-stroke-width": 1,
+                "circle-stroke-color": "hsl(56, 96%, 50%)",
+                "circle-stroke-opacity": 0.78
+            }
+        },
+        {
+            "id": "admin",
+            "type": "line",
+            "source": "composite",
+            "source-layer": "admin",
+            "layout": {
+                "visibility": "visible"
+            },
+            "paint": {
+                "line-color": "hsla(29, 6%, 1%, 0.8)",
+                "line-blur": 0,
+                "line-dasharray": [
+                    1,
+                    1
+                ],
+                "line-width": 2,
+                "line-opacity": 0.72
+            }
+        },
+        {
+            "id": "water-label",
+            "type": "symbol",
+            "source": "composite",
+            "source-layer": "water_label",
+            "layout": {
+                "visibility": "visible",
+                "text-field": "{name}",
+                "text-font": [
+                    "Ringbearer Medium",
+                    "Ringbearer Medium"
+                ],
+                "text-size": {
+                    "base": 1,
+                    "stops": [
+                        [
+                            0,
+                            26
+                        ],
+                        [
+                            22,
+                            12
+                        ]
+                    ]
+                }
+            },
+            "paint": {
+                "text-color": "hsl(158, 96%, 46%)"
+            }
+        },
+        {
+            "id": "waterway-label",
+            "type": "symbol",
+            "source": "composite",
+            "source-layer": "waterway_label",
+            "layout": {
+                "text-size": {
+                    "base": 1,
+                    "stops": [
+                        [
+                            0,
+                            22
+                        ],
+                        [
+                            22,
+                            14
+                        ]
+                    ]
+                },
+                "text-ignore-placement": true,
+                "text-max-angle": 65,
+                "symbol-spacing": 500,
+                "text-font": [
+                    "Ringbearer Medium",
+                    "Ringbearer Medium"
+                ],
+                "symbol-placement": "line",
+                "text-justify": "left",
+                "text-padding": 0,
+                "visibility": "visible",
+                "text-rotation-alignment": "map",
+                "text-anchor": "top-left",
+                "text-field": "{name_en}",
+                "text-max-width": 40
+            },
+            "paint": {
+                "text-color": "hsl(194, 85%, 49%)",
+                "text-opacity": 1,
+                "text-halo-color": "hsla(243, 94%, 50%, 0.95)",
+                "text-halo-blur": 1,
+                "text-halo-width": 1
+            }
+        },
+        {
+            "id": "airport-label",
+            "type": "symbol",
+            "source": "composite",
+            "source-layer": "airport_label",
+            "layout": {
+                "visibility": "visible",
+                "text-field": "{name}",
+                "text-font": [
+                    "Open Sans Extrabold",
+                    "Arial Unicode MS Regular"
+                ],
+                "text-size": 10,
+                "text-ignore-placement": true
+            },
+            "paint": {}
+        },
+        {
+            "id": "road-label",
+            "type": "symbol",
+            "source": "composite",
+            "source-layer": "road_label",
+            "filter": [
+                "in",
+                "$type",
+                "LineString",
+                "Point",
+                "Polygon"
+            ],
+            "layout": {
+                "text-field": "{name_en}",
+                "symbol-avoid-edges": true,
+                "symbol-placement": "line",
+                "text-size": {
+                    "base": 1.25,
+                    "stops": [
+                        [
+                            12,
+                            13
+                        ],
+                        [
+                            22,
+                            8
+                        ]
+                    ]
+                },
+                "text-pitch-alignment": "map",
+                "text-font": {
+                    "base": 1,
+                    "stops": [
+                        [
+                            0,
+                            [
+                                "Merriweather Heavy",
+                                "Arial Unicode MS Regular"
+                            ]
+                        ],
+                        [
+                            22,
+                            [
+                                "Merriweather Heavy",
+                                "Arial Unicode MS Regular"
+                            ]
+                        ]
+                    ]
+                },
+                "text-padding": 1
+            },
+            "paint": {
+                "text-color": {
+                    "base": 0.75,
+                    "stops": [
+                        [
+                            7,
+                            "hsl(0, 60%, 95%)"
+                        ],
+                        [
+                            17,
+                            "hsl(15, 26%, 95%)"
+                        ]
+                    ]
+                },
+                "text-halo-color": "hsl(0, 2%, 7%)",
+                "text-halo-blur": 0,
+                "text-halo-width": 2
+            }
+        },
+        {
+            "id": "state-label (1)",
+            "type": "symbol",
+            "source": "composite",
+            "source-layer": "state_label",
+            "maxzoom": 6.3,
+            "layout": {
+                "visibility": "visible",
+                "text-field": "{name}",
+                "text-font": [
+                    "Ringbearer Medium",
+                    "Ringbearer Medium"
+                ],
+                "text-size": {
+                    "base": 1,
+                    "stops": [
+                        [
+                            0,
+                            1
+                        ],
+                        [
+                            3,
+                            10
+                        ],
+                        [
+                            5,
+                            20
+                        ]
+                    ]
+                }
+            },
+            "paint": {
+                "text-color": "hsl(13, 12%, 4%)"
+            }
+        }
+    ],
+    "created": "2017-04-22T04:51:30.785Z",
+    "id": "cj1ssf6j100182rlbhb22yzki",
+    "modified": "2017-05-01T18:53:17.878Z",
+    "owner": "whitsons",
+    "visibility": "private",
+    "draft": false
+}
